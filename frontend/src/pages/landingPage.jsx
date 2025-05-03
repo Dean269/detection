@@ -15,16 +15,40 @@ function LandingPage() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+  
     if (!file) {
       setError("No file selected!");
       return;
     }
-
-    // In the future: POST this to your backend
-    console.log("File ready for upload:", file);
+  
+    const formData = new FormData();
+    formData.append("file", file);
+  
+    try {
+      const response = await fetch("http://localhost:8000/api/upload/", {
+        method: "POST",
+        body: formData,
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to upload. Server responded with an error.");
+      }
+  
+      const data = await response.json();
+      console.log("Upload success:", data);
+  
+      // Redirect or show success message
+      // For example: navigate("/dashboard") after a successful upload
+      // or display the plagiarism report link
+  
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      setError("Something went wrong while uploading.");
+    }
   };
+  
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6">
