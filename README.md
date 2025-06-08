@@ -108,10 +108,3 @@ npm run dev  # or npm start if using CRA
 
 **Dean Magara**  
 Built with ❤️ and a passion for ethical AI in academia.
-
----
-
-## 📜 License
-
-MIT License.  
-Feel free to fork, contribute, and build upon this project.
